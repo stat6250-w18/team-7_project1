@@ -24,3 +24,39 @@ and contains all active, pending, closed, and merged public schools and district
 ;
 
 * setup environmental parameters;
+%let inputDatasetURL =
+https://github.com/stat6250/team-7_project1/blob/initial-buildout-of-data-prep/pubschls%20(1).xlsx.xls?raw=true
+;
+%macro loadDataIfNotAlreadyAvailable(dsn,url,filetype);
+    %put &=dsn;
+    %put &=url;
+    %put &=filetype;
+    %if
+        %sysfunc(exist(&dsn.)) = 0
+    %then
+        %do;
+            %put Loading dataset &dsn. over the wire now...;
+            filename tempfile TEMP;
+            proc http
+                method="get"
+                url="&url."
+                out=tempfile
+                ;
+            run;
+            proc import
+                file=tempfile
+                out=&dsn.
+                dbms=&filetype.;
+            run;
+            filename tempfile clear;
+        %end;
+    %else
+        %do;
+            %put Dataset &dsn. already exists. Please delete and try again.;
+        %end;
+%mend;
+%loadDataIfNotAlreadyAvailable(
+    public_raw,
+    https://github.com/stat6250/team-7_project1/blob/initial-buildout-of-data-prep/pubschls%20(1).xlsx.xls?raw=true,
+    xls
+)
