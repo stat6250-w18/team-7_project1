@@ -22,3 +22,5 @@ and contains all active, pending, closed, and merged public schools and district
 
 [Unique ID Schema] The column "CDSCode" is a primary key.
 ;
+
+* setup environmental parameters;
