@@ -26,7 +26,7 @@ See included file for dataset properties
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
-* load external file that generates analytic dataset public_raw;
+*  load external file that generates analytic dataset public_raw;
 %include ".\stat6250-01_w18-team-7_project1_data_preparation.sas";
 
 *build analytic dataset from pubschls dataset with the leastcolumns and minimal
