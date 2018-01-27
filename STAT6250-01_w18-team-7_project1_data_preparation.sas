@@ -23,10 +23,11 @@ and contains all active, pending, closed, and merged public schools and district
 [Unique ID Schema] The column "CDSCode" is a primary key.
 ;
 
-* setup environmental parameters;
-%let inputDatasetURL =
-https://github.com/stat6250/team-7_project1/blob/initial-buildout-of-data-prep/pubschls%20(1).xlsx.xls?raw=true
-;
+
+*setup environmental parameters;
+%let inputDatasetURL = 
+https://github.com/stat6250/team-7_project1/blob/master/pubschls%20(1).xlsx.xls?raw=true;
+
 %macro loadDataIfNotAlreadyAvailable(dsn,url,filetype);
     %put &=dsn;
     %put &=url;
@@ -57,6 +58,6 @@ https://github.com/stat6250/team-7_project1/blob/initial-buildout-of-data-prep/p
 %mend;
 %loadDataIfNotAlreadyAvailable(
     public_raw,
-    https://github.com/stat6250/team-7_project1/blob/initial-buildout-of-data-prep/pubschls%20(1).xlsx.xls?raw=true,
+    &inputDatasetURL.,
     xls
 )
