@@ -153,8 +153,8 @@ Methodology: Use PROC FREQ to create a table to show each county's number of clo
 
 Limitations: It does not show the duration of each school. Some schools might have last hundreds of years.
 
-Possible Follow-up Steps: 
-
+Possible Follow-up Steps: I should subtract the OpenedDate and ClosedDate and compute how many days or months each school last.
+However, due to the difficulty of reformatting the OpenedDate, I was not able to compute that. 
 ;
 proc freq data=Public_3 order=freq;
  	table EdOpsName*ClosedDate*County/missing nocum;
