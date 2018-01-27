@@ -89,7 +89,7 @@ footnote1
 'According to the result, Los Angeles has the highest number of closing for traditional school, which is 222 and the number is three times higher than the second highest.'
 ;
 footnote2
-'Moreover, Los Angeles also has the highes number of closing for community day school. I think that there might be some esstential factors causing the relative high tendency of closing schools.'
+'Moreover, Los Angeles also has the highest number of closing for community day school. I think that there might be some esstential factors causing the relative high tendency of closing schools.'
 ;
 *
 Methodology: Use PROC FREQ to create a table that shows each county's number of closed Traditional and Community Day schools. 
