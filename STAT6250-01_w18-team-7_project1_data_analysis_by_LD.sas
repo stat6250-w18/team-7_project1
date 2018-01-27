@@ -7,12 +7,11 @@
 *******************************************************************************;
 
 
-
 *
 This file uses the following analytic dataset to address three research questions 
 regarding all active, pending, closed, and merged public schools and districts in 
 California.
-Dataset Name: pubschls_analytic_file created in external file 
+Dataset Name: public_raw created in external file 
 stat6250-01_w18-team-7_project1_data_preparation.sas, which is assured to be in
 the same directory as this file.
 
@@ -21,16 +20,16 @@ See included file for dataset properties
 
 * environmental setup;
 
-* set relative file import path to current directory (using standard SAS trick;
+* set relative file import path to current directory (using standard SAS trick);
 
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
-*  load external file that generates analytic dataset public_raw;
+* load external file that generates analytic dataset public_raw;
 %include ".\stat6250-01_w18-team-7_project1_data_preparation.sas";
 
-*build analytic dataset from pubschls dataset with the leastcolumns and minimal
-cleaning/transformation neededto analyze research queations in corresponding 
+*build analytic dataset from pubschls dataset with the least columns and minimal
+cleaning/transformation needed to analyze research queations in corresponding 
 data analysis files;
 
 data public_raw;
@@ -38,19 +37,27 @@ data public_raw;
         CDSCode
         NCESDist
         StatusType
-		county
-		OpenDate
-		ClosedDate
+        county
+        OpenDate
+        ClosedDate
     ;
     keep
         CDSCode
         NCESDist
         StatusType
-		county
-		OpenDate
-		ClosedDate
+        county
+        OpenDate
+        ClosedDate
 	;
 	set public_raw;
+run;
+
+ 
+/*Tried many ways to display opendate, but didn't work.*/
+
+PROC print data=public_raw;
+    title 'Public Schools in CA';
+    format openDate mmddyy10.;
 run;
 
 *
@@ -86,6 +93,7 @@ title 'Data from file sorted';
 
 PROC print data=sorted_StatusType;
 run;
+
 *
 Research Question: Which county has the most change in open, closed or merged schools?
 
@@ -120,9 +128,10 @@ footnote 'County statustype frequency';
 PROC print data=sorted_countyfreq;
 run;
 
-
-/*Analysis: these five counties,Los Angeles,San Diego,Orange,San Bernardino, and
+*
+Analysis: these five counties,Los Angeles,San Diego,Orange,San Bernardino, and
 Santa Clara, have the most open, closed, and merged schools. So we may draw a
 conclusion that enrollment is related to local demographic structure and economic 
 status change. Also, We may predict the future enrollment by using more effective 
-statistics and data analysis.*/ 
+statistics and data analysis.
+;
