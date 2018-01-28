@@ -39,17 +39,17 @@ data public_raw;
         CDSCode
         NCESDist
         StatusType
-		county
-		OpenDate
-		ClosedDate
+        county
+        OpenDate
+        ClosedDate
     ;
     keep
         CDSCode
         NCESDist
         StatusType
-		county
-		OpenDate
-		ClosedDate
+        county
+        OpenDate
+        ClosedDate
 	;
 	set public_raw;
 run;
