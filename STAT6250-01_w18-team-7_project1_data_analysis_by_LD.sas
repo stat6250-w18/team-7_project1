@@ -28,9 +28,12 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * load external file that generates analytic dataset public_raw;
 %include ".\stat6250-01_w18-team-7_project1_data_preparation.sas";
 
-*build analytic dataset from pubschls dataset with the least columns and minimal
-cleaning/transformation needed to analyze research queations in corresponding 
-data analysis files;
+*
+Build analytic dataset from pubschls dataset with the leastcolumns and minimal
+cleaning/transformation neededto analyze research queations in corresponding 
+data analysis files
+;
+
 
 data public_raw;
     retain
@@ -52,12 +55,33 @@ data public_raw;
 	set public_raw;
 run;
 
- 
-/*Tried many ways to display opendate, but didn't work.*/
+
 
 PROC print data=public_raw;
-    title 'Public Schools in CA';
-    format openDate mmddyy10.;
+    var CDSCode County StatusType openDate closedDate;
+    
+run;
+
+
+*
+The variable openDate is in wrong date format, useing FORMAT statement to 
+recover the date.(tried many times. I didn't know how the new variable can 
+replace the original openDate variable.)
+;
+
+Data SAS_openDate;
+    Set public_raw;
+    Format S_date mmddyy10.;
+    S_date = OpenDate - 21916;
+	
+run;
+
+title 'Opendate converted from Excel To SAS Format';
+
+PROC print data=SAS_openDate;
+    var CDSCode County StatusType S_date closedDate;
+    
+
 run;
 
 *
@@ -129,9 +153,11 @@ PROC print data=sorted_countyfreq;
 run;
 
 *
+
 Analysis: these five counties,Los Angeles,San Diego,Orange,San Bernardino, and
 Santa Clara, have the most open, closed, and merged schools. So we may draw a
 conclusion that enrollment is related to local demographic structure and economic 
 status change. Also, We may predict the future enrollment by using more effective 
 statistics and data analysis.
+
 ;
