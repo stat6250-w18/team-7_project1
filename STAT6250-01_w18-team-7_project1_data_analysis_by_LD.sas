@@ -34,7 +34,6 @@ cleaning/transformation neededto analyze research queations in corresponding
 data analysis files
 ;
 
-
 data public_raw;
     retain
         CDSCode
@@ -55,7 +54,7 @@ data public_raw;
 	set public_raw;
 run;
 
-
+title 'Print dataset Public_raw';
 
 PROC print data=public_raw;
     var CDSCode County StatusType openDate closedDate;
@@ -81,7 +80,6 @@ title 'Opendate converted from Excel To SAS Format';
 PROC print data=SAS_openDate;
     var CDSCode County StatusType S_date closedDate;
     
-
 run;
 
 *
@@ -99,6 +97,8 @@ values.
 Follow-up Setps: other statistical methods are necessary.  
 
 ;
+
+title 'Sort public_raw data';
 
 PROC sort data=public_raw out=sorted;
     by CDSCode County StatusType openDate closedDate;
@@ -132,6 +132,8 @@ Follow-up Setps: use separatly SORT and FREQ statements to display variables wha
 you need.
 
 ;
+
+title 'Frequency county';
 
 PROC freq data=sorted;
     tables county / out=countyfreq;
