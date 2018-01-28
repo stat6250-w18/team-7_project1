@@ -7,12 +7,11 @@
 *******************************************************************************;
 
 
-
 *
 This file uses the following analytic dataset to address three research questions 
 regarding all active, pending, closed, and merged public schools and districts in 
 California.
-Dataset Name: pubschls_analytic_file created in external file 
+Dataset Name: public_raw created in external file 
 stat6250-01_w18-team-7_project1_data_preparation.sas, which is assured to be in
 the same directory as this file.
 
@@ -21,18 +20,20 @@ See included file for dataset properties
 
 * environmental setup;
 
-* set relative file import path to current directory (using standard SAS trick;
+* set relative file import path to current directory (using standard SAS trick);
 
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
 * load external file that generates analytic dataset public_raw;
 %include ".\stat6250-01_w18-team-7_project1_data_preparation.sas";
+
 *
 Build analytic dataset from pubschls dataset with the leastcolumns and minimal
 cleaning/transformation neededto analyze research queations in corresponding 
 data analysis files
 ;
+
 
 data public_raw;
     retain
@@ -53,6 +54,7 @@ data public_raw;
 	;
 	set public_raw;
 run;
+
 
 
 PROC print data=public_raw;
@@ -79,6 +81,7 @@ title 'Opendate converted from Excel To SAS Format';
 PROC print data=SAS_openDate;
     var CDSCode County StatusType S_date closedDate;
     
+
 run;
 
 *
@@ -114,6 +117,7 @@ title 'Data from file sorted';
 
 PROC print data=sorted_StatusType;
 run;
+
 *
 Research Question: Which county has the most change in open, closed or merged schools?
 
