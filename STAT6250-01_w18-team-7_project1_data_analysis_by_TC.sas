@@ -43,34 +43,6 @@ Some counties might tend to have higher number of closing schools than others. O
 Possible Follow-up Steps: To acheieve this goeal, I should gather up the information of county's closing number for different education types. 
 
 ;
-proc format;
-    value $Educational_Option_Type_bins
-	 	"Alternative Schools of Choice"="Alternative Schools of Choice"
-        "Community Day School"="Community Day School"
-        "Continuation School"="Continuation School"
-        "County Community School"="County Community School"
-        "District Special Education Consortia School"="District Special Education Consortia School"
-        "Home and Hospital"="Home and Hospital"
-        "Juvenile Court School"="Juvenile Court School"
-        "Opportunity School"="Opportunity School"
-        "Special Education School"="Special Education School"
-        "State Special School"="State Special School"
-        "Youth Authority School"="Youth Authority School"
-        other
-        ="Traditional";
-	value $status
-	 	"Active"="Actice"
-		"Closed"="Closed"
-		"Pending"="Pending"
-		"Merged"="Merged";
-	value ClosedDate
-	 	low-'30DEC1995'd=">20 years ago"
-		'01JAN1996'd-'30DEC2000'd='1996-2000'
-		'01JAN2001'd-'30DEC2005'd='2001-2005'
-		'01JAN2006'd-'30DEC2010'd='2006-2010'
-		'01JAN/2011'd-'30DEC2015'd='2011-2015'
-		'01JAN2016'd-'30DEC2018'd='2016-2018';
-run;
 proc freq data=Public_raw;
  	table EdOpsName*StatusType/missing list;
 	format 
