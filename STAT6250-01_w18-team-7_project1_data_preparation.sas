@@ -13,10 +13,10 @@
 [Number of Features] 49
 
 [Data Source] https://www.cde.ca.gov/ds/si/ds/pubschls.asp
-
-The dataset was obtained from California department of education. It is dynamically driven and reflect real-time data,
-
-and contains all active, pending, closed, and merged public schools and districts.
+The dataset was obtained from California department of education. 
+It is dynamically driven and reflect real-time data,
+and contains all active, pending, closed, and merged public schools 
+and districts.
 
 [Data Dictionary] https://www.cde.ca.gov/schooldirectory/report?rid=dl1&tp=xlsx
 
@@ -26,8 +26,11 @@ and contains all active, pending, closed, and merged public schools and district
 
 *setup environmental parameters;
 %let inputDatasetURL = 
-https://github.com/stat6250/team-7_project1/blob/master/pubschls%20(1).xlsx.xls?raw=true;
+https://github.com/stat6250/team-7_project1/blob/master/public_school_dataset.xls?raw=true
+;
 
+
+* load raw FRPM dataset over the wire;
 %macro loadDataIfNotAlreadyAvailable(dsn,url,filetype);
     %put &=dsn;
     %put &=url;
@@ -61,10 +64,13 @@ https://github.com/stat6250/team-7_project1/blob/master/pubschls%20(1).xlsx.xls?
     &inputDatasetURL.,
     xls
 )
+
+
+
 *create out format;
 proc format;
     value $Educational_Option_Type_bins
-	 	"Alternative Schools of Choice"="Alternative Schools of Choice"
+        "Alternative Schools of Choice"="Alternative Schools of Choice"
         "Community Day School"="Community Day School"
         "Continuation School"="Continuation School"
         "County Community School"="County Community School"
