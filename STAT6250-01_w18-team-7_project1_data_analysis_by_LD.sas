@@ -29,10 +29,13 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 %include ".\stat6250-01_w18-team-7_project1_data_preparation.sas";
 
 
-title 'Print dataset Publicschool_analysis';
 
-PROC print data=publicschool_analysis;
-    var CDSCode County StatusType openDate closedDate;
+PROC print 
+        data=publicschool_analysis
+    ;
+        var 
+        CDSCode County StatusType openDate closedDate
+    ;
     
 run;
 
@@ -50,19 +53,28 @@ Data publicschool_analysis_file;
 	
 run;
 
-title 'Opendate converted from Excel To SAS Format';
 
-PROC print data=publicschool_analysis_file;
-    var CDSCode County StatusType S_date closedDate;
-    
+PROC print 
+        data=publicschool_analysis_file
+    ;
+        var 
+        CDSCode County StatusType S_date closedDate
+    ;
 run;
 
+title1
+'Research Question: What are the top five school districts with the most school 
+closings?'
+;
+title2
+'Rationale: This would help to find the factors of low enrollment.'
+;
+
+footnote1
+'Based on the above output,we can find top five districts with the most change.'
+;
+
 *
-Research Question: What are the top five school districts with the most school 
-closings?
-
-Rationale: This would help to find the factors of low enrollment.
-
 Methodology: use PROC SORT to count the numbers of close schools in each school 
 districts, and use PROC PRINT to get variables what I need.
 
@@ -73,18 +85,42 @@ Follow-up Setps: other statistical methods are necessary.
 
 ;
 
-title 'Sort publicschool_analysis data';
 
-PROC sort data=publicschool_analysis out=publicschool_analysis_sorted;
-    by CDSCode County StatusType openDate closedDate;
+PROC sort 
+        data=publicschool_analysis out=publicschool_analysis_sorted
+    ;    
+        by CDSCode County StatusType openDate closedDate
+    ;
 run;
+title;
+footnote;
 
+
+
+title1
+'Research Question: Which county has the most change in open, closed or merged schools?'
+;
+
+title2
+'Rationale: This would help to show the trend of the enrollment.'
+;
+
+footnote1
+'Based on output, these five counties,Los Angeles,San Diego,Orange,San Bernardino, and
+Santa Clara, have the most open, closed, and merged schools.'
+;
+
+footnote2 
+'So we may draw a conclusion that enrollment is related to local demographic structure 
+and economic status change.' 
+;
+
+footnote3
+'Also, We may predict the future enrollment by using more effective 
+statistics and data analysis.'
+;
 
 *
-Research Question: Which county has the most change in open, closed or merged schools?
-
-Rationale: This would help to show the trend of the enrollment.
-
 Methodology: use PROC FREQ to count open, closed or merged schools in every county 
 predicting the trend of enrollment.
 
@@ -92,16 +128,20 @@ Limitations: the PROC freq only display a table.
 
 Follow-up Setps: use separatly SORT and FREQ statements to display variables what 
 you need.
-
 ;
 
 title 'Frequency county';
 
-PROC freq data=publicschool_analysis_sorted;
-    tables county / out=publicschool_analysis_countyfreq;
+PROC freq 
+        data=publicschool_analysis_sorted
+    ;
+        tables county / out=publicschool_analysis_countyfreq
+    ;
 
-PROC sort data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
-    by descending count;
+PROC sort 
+        data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
+        by descending count
+    ;
 run;
 
 data want;
@@ -109,19 +149,13 @@ data want;
 	cumcount + count;
 	cumpercent + percent;
 run;
+title;
+footnote;
 
-title 'Data from publicschool_analysis_countyfreq';
-footnote 'publicschool_analysis_countyfreq';
 
-PROC print data=publicschool_analysis_temp;
+
+PROC print 
+        data=publicschool_analysis_temp
+    ;
 run;
 
-*
-
-Analysis: these five counties,Los Angeles,San Diego,Orange,San Bernardino, and
-Santa Clara, have the most open, closed, and merged schools. So we may draw a
-conclusion that enrollment is related to local demographic structure and economic 
-status change. Also, We may predict the future enrollment by using more effective 
-statistics and data analysis.
-
-;
