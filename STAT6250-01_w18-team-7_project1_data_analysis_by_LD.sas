@@ -11,6 +11,7 @@
 This file uses the following analytic dataset to address three research questions 
 regarding all active, pending, closed, and merged public schools and districts in 
 California.
+
 Dataset Name: public_raw created in external file 
 stat6250-01_w18-team-7_project1_data_preparation.sas, which is assured to be in
 the same directory as this file.
@@ -29,49 +30,18 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 %include ".\stat6250-01_w18-team-7_project1_data_preparation.sas";
 
 
-
-PROC print 
-        data=publicschool_analysis
-    ;
-        var 
-        CDSCode County StatusType openDate closedDate
-    ;
-    
-run;
-
-
-*
-The variable openDate is in wrong date format, useing FORMAT statement to 
-recover the date.(tried many times. I didn't know how the new variable can 
-replace the original openDate variable.)
-;
-
-Data publicschool_analysis_file;
-    Set publicschool_analysis;
-    Format S_date mmddyy10.;
-    S_date = OpenDate - 21916;
-	
-run;
-
-
-PROC print 
-        data=publicschool_analysis_file
-    ;
-        var 
-        CDSCode County StatusType S_date closedDate
-    ;
-run;
-
 title1
 'Research Question: What are the top five school districts with the most school 
 closings?'
 ;
+
 title2
 'Rationale: This would help to find the factors of low enrollment.'
 ;
 
 footnote1
 'Based on the above output,we can find top five districts with the most change.'
+
 ;
 
 *
@@ -86,7 +56,7 @@ Follow-up Setps: other statistical methods are necessary.
 ;
 
 
-PROC sort 
+proc sort 
         data=publicschool_analysis out=publicschool_analysis_sorted
     ;    
         by CDSCode County StatusType openDate closedDate
@@ -120,6 +90,7 @@ footnote3
 statistics and data analysis.'
 ;
 
+
 *
 Methodology: use PROC FREQ to count open, closed or merged schools in every county 
 predicting the trend of enrollment.
@@ -130,15 +101,51 @@ Follow-up Setps: use separatly SORT and FREQ statements to display variables wha
 you need.
 ;
 
-title 'Frequency county';
 
-PROC freq 
+proc freq 
         data=publicschool_analysis_sorted
     ;
         tables county / out=publicschool_analysis_countyfreq
     ;
 
-PROC sort 
+run;
+title;
+footnote;
+
+
+title1
+'Research Question: Can the closure, open and merge of schools predict local demographic 
+structure and economic status change?'
+;
+
+title2
+'Rationale: This would help to analyze what factors influence the enrollment.'
+;
+
+footnote1
+"Based on the data analysis, it is difficult to draw conclusion that which factor caused the school's
+enrollment."
+;
+
+footnote2
+'But we know that the enrollment is dependent on social situations.'
+;
+
+
+
+
+*
+Methodology: use PROC FREQ to count open, closed or merged schools in every county 
+predicting the trend of enrollment.
+
+Limitations: the PROC freq only display a table.
+
+Follow-up Setps: use separatly SORT and FREQ statements to display variables what 
+you need.
+;
+ 
+
+proc sort 
         data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
         by descending count
     ;
@@ -154,8 +161,10 @@ footnote;
 
 
 
-PROC print 
+proc print 
         data=publicschool_analysis_temp
     ;
 run;
+
+
 
