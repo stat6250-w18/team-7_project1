@@ -32,10 +32,10 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 PROC print 
         data=publicschool_analysis
-		;
+    ;
         var 
         CDSCode County StatusType openDate closedDate
-		;
+    ;
     
 run;
 
@@ -56,10 +56,10 @@ run;
 
 PROC print 
         data=publicschool_analysis_file
-		;
+    ;
         var 
         CDSCode County StatusType S_date closedDate
-		;
+    ;
 run;
 
 title1
@@ -88,9 +88,9 @@ Follow-up Setps: other statistical methods are necessary.
 
 PROC sort 
         data=publicschool_analysis out=publicschool_analysis_sorted
-		;
+    ;    
         by CDSCode County StatusType openDate closedDate
-		;
+    ;
 run;
 title;
 footnote;
@@ -134,14 +134,14 @@ title 'Frequency county';
 
 PROC freq 
         data=publicschool_analysis_sorted
-		;
+    ;
         tables county / out=publicschool_analysis_countyfreq
-		;
+    ;
 
 PROC sort 
         data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
         by descending count
-		;
+    ;
 run;
 
 data want;
@@ -156,6 +156,6 @@ footnote;
 
 PROC print 
         data=publicschool_analysis_temp
-		;
+    ;
 run;
 
