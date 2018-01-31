@@ -28,31 +28,6 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * load external file that generates analytic dataset public_raw;
 %include ".\stat6250-01_w18-team-7_project1_data_preparation.sas";
 
-*
-Build analytic dataset from pubschls dataset with the leastcolumns and minimal
-cleaning/transformation neededto analyze research queations in corresponding 
-data analysis files
-;
-
-data publicschool_analysis;
-    retain
-        CDSCode
-        NCESDist
-        StatusType
-        county
-        OpenDate
-        ClosedDate
-    ;
-    keep
-        CDSCode
-        NCESDist
-        StatusType
-        county
-        OpenDate
-        ClosedDate
-	;
-	set public_raw;
-run;
 
 title 'Print dataset Publicschool_analysis';
 
@@ -78,7 +53,7 @@ run;
 title 'Opendate converted from Excel To SAS Format';
 
 PROC print data=publicschool_analysis_file;
-    var CDSCode County StatusType openDate closedDate;
+    var CDSCode County StatusType S_date closedDate;
     
 run;
 
@@ -104,12 +79,6 @@ PROC sort data=publicschool_analysis out=publicschool_analysis_sorted;
     by CDSCode County StatusType openDate closedDate;
 run;
 
-title 'Data from publicschool_analysis_sorted';
-
-PROC print data=publicschool_analysis_sorted;
-    var CDSCode County StatusType openDate closedDate;
-run;
-
 
 *
 Research Question: Which county has the most change in open, closed or merged schools?
@@ -128,7 +97,7 @@ you need.
 
 title 'Frequency county';
 
-PROC freq publicschool_analysis_sorted;
+PROC freq data=publicschool_analysis_sorted;
     tables county / out=publicschool_analysis_countyfreq;
 
 PROC sort data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
@@ -136,13 +105,13 @@ PROC sort data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
 run;
 
 data want;
-    set countyfreq;
+    set publicschool_analysis_countyfreq;
 	cumcount + count;
 	cumpercent + percent;
 run;
 
-title 'Data from publicschool_analysis_temp';
-footnote 'publicschool_analysis_temp';
+title 'Data from publicschool_analysis_countyfreq';
+footnote 'publicschool_analysis_countyfreq';
 
 PROC print data=publicschool_analysis_temp;
 run;
