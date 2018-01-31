@@ -100,4 +100,28 @@ https://github.com/stat6250/team-7_project1/blob/master/public_school_dataset.xl
     xls
 )
 
+*
+Build analytic dataset from pubschls dataset with the leastcolumns and minimal
+cleaning/transformation neededto analyze research queations in corresponding 
+data analysis files
+;
 
+data publicschool_analysis;
+    retain
+        CDSCode
+        NCESDist
+        StatusType
+        county
+        OpenDate
+        ClosedDate
+    ;
+    keep
+        CDSCode
+        NCESDist
+        StatusType
+        county
+        OpenDate
+        ClosedDate
+	;
+	set public_raw;
+run;

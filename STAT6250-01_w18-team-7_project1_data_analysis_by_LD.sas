@@ -34,7 +34,7 @@ cleaning/transformation neededto analyze research queations in corresponding
 data analysis files
 ;
 
-data public_raw;
+data publicschool_analysis;
     retain
         CDSCode
         NCESDist
@@ -54,9 +54,9 @@ data public_raw;
 	set public_raw;
 run;
 
-title 'Print dataset Public_raw';
+title 'Print dataset Publicschool_analysis';
 
-PROC print data=public_raw;
+PROC print data=publicschool_analysis;
     var CDSCode County StatusType openDate closedDate;
     
 run;
@@ -68,8 +68,8 @@ recover the date.(tried many times. I didn't know how the new variable can
 replace the original openDate variable.)
 ;
 
-Data SAS_openDate;
-    Set public_raw;
+Data publicschool_analysis_file;
+    Set publicschool_analysis;
     Format S_date mmddyy10.;
     S_date = OpenDate - 21916;
 	
@@ -77,8 +77,8 @@ run;
 
 title 'Opendate converted from Excel To SAS Format';
 
-PROC print data=SAS_openDate;
-    var CDSCode County StatusType S_date closedDate;
+PROC print data=publicschool_analysis_file;
+    var CDSCode County StatusType openDate closedDate;
     
 run;
 
@@ -98,25 +98,18 @@ Follow-up Setps: other statistical methods are necessary.
 
 ;
 
-title 'Sort public_raw data';
+title 'Sort publicschool_analysis data';
 
-PROC sort data=public_raw out=sorted;
+PROC sort data=publicschool_analysis out=publicschool_analysis_sorted;
     by CDSCode County StatusType openDate closedDate;
 run;
 
-title 'Data from file public_raw';
+title 'Data from publicschool_analysis_sorted';
 
-PROC print data=sorted;
+PROC print data=publicschool_analysis_sorted;
     var CDSCode County StatusType openDate closedDate;
 run;
 
-PROC sort data=sorted out=sorted_StatusType;
-    by StatusType;
-
-title 'Data from file sorted';
-
-PROC print data=sorted_StatusType;
-run;
 
 *
 Research Question: Which county has the most change in open, closed or merged schools?
@@ -135,10 +128,10 @@ you need.
 
 title 'Frequency county';
 
-PROC freq data=sorted;
-    tables county / out=countyfreq;
+PROC freq publicschool_analysis_sorted;
+    tables county / out=publicschool_analysis_countyfreq;
 
-PROC sort data=countyfreq out=sorted_countyfreq;
+PROC sort data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
     by descending count;
 run;
 
@@ -148,10 +141,10 @@ data want;
 	cumpercent + percent;
 run;
 
-title 'Data from file countyfreq';
-footnote 'County statustype frequency';
+title 'Data from publicschool_analysis_temp';
+footnote 'publicschool_analysis_temp';
 
-PROC print data=sorted_countyfreq;
+PROC print data=publicschool_analysis_temp;
 run;
 
 *
