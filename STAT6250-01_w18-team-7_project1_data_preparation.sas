@@ -44,17 +44,17 @@ proc format;
         other
         ="Traditional";
     value $status
-	 	"Active"="Actice"
-		"Closed"="Closed"
-		"Pending"="Pending"
-		"Merged"="Merged";
+        "Active"="Actice"
+        "Closed"="Closed"
+        "Pending"="Pending"
+        "Merged"="Merged";
     value ClosedDate
-	 	low-'30DEC1995'd=">20 years ago"
-		'01JAN1996'd-'30DEC2000'd='1996-2000'
-		'01JAN2001'd-'30DEC2005'd='2001-2005'
-		'01JAN2006'd-'30DEC2010'd='2006-2010'
-		'01JAN/2011'd-'30DEC2015'd='2011-2015'
-		'01JAN2016'd-'30DEC2018'd='2016-2018';
+        low-'30DEC1995'd=">20 years ago"
+        '01JAN1996'd-'30DEC2000'd='1996-2000'
+        '01JAN2001'd-'30DEC2005'd='2001-2005'
+        '01JAN2006'd-'30DEC2010'd='2006-2010'
+        '01JAN/2011'd-'30DEC2015'd='2011-2015'
+        '01JAN2016'd-'30DEC2018'd='2016-2018';
 run;
 
 
