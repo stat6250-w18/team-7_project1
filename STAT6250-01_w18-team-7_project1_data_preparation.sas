@@ -43,12 +43,12 @@ proc format;
         "Youth Authority School"="Youth Authority School"
         other
         ="Traditional";
-	value $status
+    value $status
 	 	"Active"="Actice"
 		"Closed"="Closed"
 		"Pending"="Pending"
 		"Merged"="Merged";
-	value ClosedDate
+    value ClosedDate
 	 	low-'30DEC1995'd=">20 years ago"
 		'01JAN1996'd-'30DEC2000'd='1996-2000'
 		'01JAN2001'd-'30DEC2005'd='2001-2005'
@@ -136,7 +136,7 @@ The variable openDate is in wrong date format, useing FORMAT statement to
 recover the date.
 ;
 Data publicschool_analysis_file;
-    Set publicschool_analysis;
-    Format S_date mmddyy10.;
-    S_date = OpenDate - 21916;
+     Set publicschool_analysis;
+     Format S_date mmddyy10.;
+     S_date = OpenDate - 21916;
 run;
