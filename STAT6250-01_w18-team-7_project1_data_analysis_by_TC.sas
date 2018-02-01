@@ -6,12 +6,14 @@
 *
 This file uses the following analytic dataset to address several research
 questions regarding Campus Closing at CA schools
+
 Dataset Name: Public_raw created 
 STAT6250-01_w18-team-7_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
-See included file for dataset properties
 
+See included file for dataset properties
 ;
+
 * environmental setup; 
 
 * set relative file import path to current directory (using standard SAS trick);
@@ -90,7 +92,8 @@ percentage of closing schools overall.
 ;	
 proc freq data=Public_raw order=freq;
  	table EdOpsName*County*StatusType/missing nocum;
- 	where StatusType contains 'Closed' and (EdOpsName  = 'Traditional' or EdOpsName ='Community Day School');
+ 	where StatusType contains 'Closed' 
+    and (EdOpsName  = 'Traditional' or EdOpsName ='Community Day School');
  	format 
  		EdOpsName $Educational_Option_Type_bins.;
 run;
@@ -128,7 +131,8 @@ of reformatting the OpenedDate, I was not able to compute that.
 ;
 proc freq data=Public_raw order=freq;
  	table EdOpsName*ClosedDate*County/missing nocum;
- 	where StatusType contains 'Closed' and (EdOpsName  = 'Traditional' or EdOpsName ='Community Day School');
+ 	where StatusType contains 'Closed' 
+    and (EdOpsName  = 'Traditional' or EdOpsName ='Community Day School');
  	format 
  		EdOpsName $Educational_Option_Type_bins.
  		ClosedDate ClosedDate.;
