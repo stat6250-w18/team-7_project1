@@ -51,10 +51,10 @@ Possible Follow-up Steps: To acheieve this goeal, I should gather up the
 information of county's closing number for different education types. 
 ;
 proc freq data=Public_raw;
- 	table EdOpsName*StatusType/missing list;
-	format 
- 		EdOpsName $Educational_Option_Type_bins.
-		StatusType $status.;
+    table EdOpsName*StatusType/missing list;
+    format 
+          EdOpsName $Educational_Option_Type_bins.
+          StatusType $status.;
 run;
 title;
 footnote;
@@ -91,11 +91,11 @@ In this way, it is more objective to analyze if Los Angeles has the highest
 percentage of closing schools overall. 
 ;	
 proc freq data=Public_raw order=freq;
- 	table EdOpsName*County*StatusType/missing nocum;
- 	where StatusType contains 'Closed' 
+    table EdOpsName*County*StatusType/missing nocum;
+    where StatusType contains 'Closed' 
     and (EdOpsName  = 'Traditional' or EdOpsName ='Community Day School');
- 	format 
- 		EdOpsName $Educational_Option_Type_bins.;
+    format 
+          EdOpsName $Educational_Option_Type_bins.;
 run;
 title;
 footnote;
@@ -130,12 +130,12 @@ compute how many days or months each school last. However, due to the difficulty
 of reformatting the OpenedDate, I was not able to compute that. 
 ;
 proc freq data=Public_raw order=freq;
- 	table EdOpsName*ClosedDate*County/missing nocum;
- 	where StatusType contains 'Closed' 
+    table EdOpsName*ClosedDate*County/missing nocum;
+    where StatusType contains 'Closed' 
     and (EdOpsName  = 'Traditional' or EdOpsName ='Community Day School');
- 	format 
- 		EdOpsName $Educational_Option_Type_bins.
- 		ClosedDate ClosedDate.;
+    format 
+          EdOpsName $Educational_Option_Type_bins.
+          ClosedDate ClosedDate.;
 run;
 title;
 footnote;
