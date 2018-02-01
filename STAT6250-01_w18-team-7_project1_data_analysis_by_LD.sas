@@ -12,7 +12,7 @@ This file uses the following analytic dataset to address three research question
 regarding all active, pending, closed, and merged public schools and districts in 
 California.
 
-Dataset Name: public_school_dataset created in external file 
+Dataset Name: public_raw created in external file 
 stat6250-01_w18-team-7_project1_data_preparation.sas, which is assured to be in
 the same directory as this file.
 
@@ -73,15 +73,11 @@ title2
 ;
 
 footnote1
-'Based on output, these five counties,Los Angeles,San Diego,Orange,San Bernardino, and Santa Clara, have the most open, closed, and merged schools.'
+"Based on the data analysis, it is difficult to draw conclusion that which factor caused the school's enrollment."
 ;
 
-footnote2 
-'So we may draw a conclusion that enrollment is related to local demographic structure and economic status change.' 
-;
-
-footnote3
-'Also, We may predict the future enrollment by using more effective statistics and data analysis.'
+footnote2
+'But we know that the enrollment is dependent on social situations.'
 ;
 
 *
@@ -115,11 +111,15 @@ title2
 ;
 
 footnote1
-"Based on the data analysis, it is difficult to draw conclusion that which factor caused the school's enrollment."
+'Based on output, these five counties,Los Angeles,San Diego,Orange,San Bernardino, and Santa Clara, have the most open, closed, and merged schools.'
 ;
 
 footnote2
-'But we know that the enrollment is dependent on social situations.'
+'So we may draw a conclusion that enrollment is related to local demographic structure and economic status change.' 
+;
+
+footnote3
+'Also, We may predict the future enrollment by using more effective statistics and data analysis.'
 ;
 
 *
