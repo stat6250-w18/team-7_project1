@@ -12,7 +12,7 @@ This file uses the following analytic dataset to address three research question
 regarding all active, pending, closed, and merged public schools and districts in 
 California.
 
-Dataset Name: public_raw created in external file 
+Dataset Name: public_school_dataset created in external file 
 stat6250-01_w18-team-7_project1_data_preparation.sas, which is assured to be in
 the same directory as this file.
 
@@ -26,13 +26,13 @@ See included file for dataset properties
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
-* load external file that generates analytic dataset public_raw;
+* load external file that generates analytic dataset public_school_dataset;
 %include ".\stat6250-01_w18-team-7_project1_data_preparation.sas";
 
 
+
 title1
-'Research Question: What are the top five school districts with the most school 
-closings?'
+'Research Question: What are the top five school districts with the most school closings?'
 ;
 
 title2
@@ -41,7 +41,6 @@ title2
 
 footnote1
 'Based on the above output,we can find top five districts with the most change.'
-
 ;
 
 *
@@ -52,10 +51,7 @@ Limitations: This methodology does not account for observations with missing
 values.
 
 Follow-up Setps: other statistical methods are necessary.  
-
 ;
-
-
 proc sort 
         data=publicschool_analysis out=publicschool_analysis_sorted
     ;    
@@ -64,6 +60,7 @@ proc sort
 run;
 title;
 footnote;
+
 
 
 
@@ -76,20 +73,16 @@ title2
 ;
 
 footnote1
-'Based on output, these five counties,Los Angeles,San Diego,Orange,San Bernardino, and
-Santa Clara, have the most open, closed, and merged schools.'
+'Based on output, these five counties,Los Angeles,San Diego,Orange,San Bernardino, and Santa Clara, have the most open, closed, and merged schools.'
 ;
 
 footnote2 
-'So we may draw a conclusion that enrollment is related to local demographic structure 
-and economic status change.' 
+'So we may draw a conclusion that enrollment is related to local demographic structure and economic status change.' 
 ;
 
 footnote3
-'Also, We may predict the future enrollment by using more effective 
-statistics and data analysis.'
+'Also, We may predict the future enrollment by using more effective statistics and data analysis.'
 ;
-
 
 *
 Methodology: use PROC FREQ to count open, closed or merged schools in every county 
@@ -101,16 +94,15 @@ Follow-up Setps: use separatly SORT and FREQ statements to display variables wha
 you need.
 ;
 
-
 proc freq 
         data=publicschool_analysis_sorted
     ;
         tables county / out=publicschool_analysis_countyfreq
     ;
-
 run;
 title;
 footnote;
+
 
 
 title1
@@ -123,16 +115,12 @@ title2
 ;
 
 footnote1
-"Based on the data analysis, it is difficult to draw conclusion that which factor caused the school's
-enrollment."
+"Based on the data analysis, it is difficult to draw conclusion that which factor caused the school's enrollment."
 ;
 
 footnote2
 'But we know that the enrollment is dependent on social situations.'
 ;
-
-
-
 
 *
 Methodology: use PROC FREQ to count open, closed or merged schools in every county 
@@ -144,7 +132,6 @@ Follow-up Setps: use separatly SORT and FREQ statements to display variables wha
 you need.
 ;
  
-
 proc sort 
         data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
         by descending count
@@ -156,15 +143,12 @@ data want;
 	cumcount + count;
 	cumpercent + percent;
 run;
-title;
-footnote;
-
-
 
 proc print 
         data=publicschool_analysis_temp
     ;
 run;
-
+title;
+footnote;
 
 
