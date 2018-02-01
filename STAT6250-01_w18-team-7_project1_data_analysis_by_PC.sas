@@ -19,8 +19,12 @@ See included file for dataset properties
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
 
-* load external file that generates analytic dataset FRPM1516_analytic_file;
+* load external file that generates public_school_dataset.xls;
 %include '.\STAT6250-01_w18-team-7_project1_data_preparation.sas';
+
+
+
+
 
 title1
 'Research Question: What are the lowest ten CODScode with School and Street?'
@@ -63,6 +67,12 @@ proc print
 	var 
 	    Street;
 run;
+title;
+footnote;
+
+
+
+
 title1
 'Research Question: What are the very first twenty address, city, zipcode of school?'
 ;
@@ -114,6 +124,13 @@ proc print
 		Zip
 	;
 run;
+title;
+footnote;
+
+
+
+
+
 title1
 'Research Question: How many school located in Hayward with the lowest SOC to highest?'
 ;
@@ -152,5 +169,6 @@ proc print
     var
         SOC
     ;
-	run;
-
+run;
+title;
+footnote;
