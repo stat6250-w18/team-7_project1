@@ -131,12 +131,3 @@ run;
 
 
 
-*
-The variable openDate is in wrong date format, useing FORMAT statement to 
-recover the date.
-;
-data publicschool_analysis_file;
-     Set publicschool_analysis;
-     Format S_date mmddyy10.;
-     S_date = OpenDate - 21916;
-run;
