@@ -24,8 +24,6 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 
-
-
 title1
 'Research Question: What are the lowest ten CODScode with School and Street?'
 ;
@@ -33,7 +31,6 @@ title1
 title2
 'Rationale: This should help identify where are the School and Street in the lowest CODScode levels.'
 ;
-
 
 footnote1
 'Based on the above output, there are three schools located in the same county and two in the same street.'
@@ -56,10 +53,9 @@ these differenct schools locate.
 
 Possible Follow-up Steps: To acheieve this goeal, I should gather up the 
 information of the very first twenty address, city, zipcode of schools.
-
 ;
 proc print
-       
+        noobs
         data=Public_raw(obs=10)
     ;
     id
@@ -76,11 +72,10 @@ footnote;
 
 
 
-
-
 title1
 'Research Question: What are the very first twenty address, city, zipcode of school?'
 ;
+
 title2
 'Rationale: This should help identify where are the first twenty Schools located in the same area.'
 ;
@@ -96,6 +91,7 @@ footnote2
 footnote3
 'Further analysis, there are six schools from Oakland, which is taking the most part of school in the very first twenty.'
 ;
+
 *
 Methodology: Use PROC PRINT to create a table that shows the very first twenty 
 address, city, zipcode of school. 
@@ -137,11 +133,10 @@ footnote;
 
 
 
-
-
 title1
 'Research Question: How many school located in Hayward with the lowest SOC to highest?'
 ;
+
 title2
 'Rationale: This should help identify how many total school in Hayward.'
 ;
@@ -170,8 +165,7 @@ rather than only Hayward even if it has higher number of closing school in
 California.
 ;	
 proc print
-       
-        data=Public_raw noobs
+         data=Public_raw noobs
     ;
 	where City in ('Hayward');
     id
