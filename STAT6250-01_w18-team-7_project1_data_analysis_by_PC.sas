@@ -7,12 +7,14 @@
 *
 This file uses the following analytic dataset to address several research
 questions regarding pending, active, closed and merged Campus at CA schools.
+
 Dataset Name: Public_raw created 
 STAT6250-01_w18-team-7_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
-See included file for dataset properties
 
+See included file for dataset properties
 ;
+
 * environmental setup; 
 
 * set relative file import path to current directory (using standard SAS trick);
@@ -41,8 +43,7 @@ footnote2
 ;
 
 footnote3
-'Further analysis to look for the very first CODScode with Schools and Street 
-and how far between them. '
+'Further analysis to look for the very first CODScode with Schools and Street and how far between them.'
 ;
 *
 Methodology: Use PROC FRINT to create a table that shows what are the lowest ten
@@ -103,30 +104,26 @@ Possible Follow-up Steps: To acheieve this goeal, I should do the search that
 how many schools loacated in Hayward with lowest SOC to highest.
 ;	
 proc print
-       
         data=Public_raw(obs=20)
-		NOOBS
     ;
     id
-		
-		School
+	School
     ;
     var
         StreetAbr
     ;
-	var 
-	    Street
-
+    var 
+	Street
     ;
-	var 
-		City
-	;
-	var 
-	   State
-	;
-	var 
-		Zip
-	;
+    var 
+        City
+    ;
+    var 
+	State
+    ;
+    var 
+        Zip
+    ;
 run;
 title;
 footnote;
