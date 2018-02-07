@@ -129,5 +129,9 @@ data publicschool_analysis;
 run;
 
 
-
+proc sort 
+        data=publicschool_analysis out=school_analysis;
+        by descending CDSCode NCESDist county
+    ;
+run;
 

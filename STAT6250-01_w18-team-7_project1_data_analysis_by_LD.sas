@@ -52,11 +52,12 @@ values.
 
 Follow-up Setps: other statistical methods are necessary.  
 ;
-proc sort 
-        data=publicschool_analysis out=publicschool_analysis_sorted
-    ;    
-        by CDSCode County StatusType openDate closedDate
-    ;
+
+proc freq 
+        data=school_analysis order=freq 
+	;
+		table NCESDist / out=school_analysis_NCESDist 
+	;
 run;
 title;
 footnote;
@@ -91,13 +92,14 @@ you need.
 ;
 
 proc freq 
-        data=publicschool_analysis_sorted
+        data=school_analysis order=freq
     ;
-        tables county / out=publicschool_analysis_countyfreq
+        tables county / out=school_analysis_countyfreq
     ;
 run;
 title;
 footnote;
+
 
 
 
@@ -131,21 +133,16 @@ Limitations: the PROC freq only display a table.
 Follow-up Setps: use separatly SORT and FREQ statements to display variables what 
 you need.
 ;
- 
-proc sort 
-        data=publicschool_analysis_countyfreq out=publicschool_analysis_temp;
-        by descending count
-    ;
-run;
+
 
 data want;
-    set publicschool_analysis_countyfreq;
+    set school_analysis_countyfreq;
 	cumcount + count;
 	cumpercent + percent;
 run;
 
 proc print 
-        data=publicschool_analysis_temp
+        data=want (obs=10)
     ;
 run;
 title;
