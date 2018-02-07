@@ -134,15 +134,8 @@ Follow-up Setps: use separatly SORT and FREQ statements to display variables wha
 you need.
 ;
 
-
-data want;
-    set school_analysis_countyfreq;
-	cumcount + count;
-	cumpercent + percent;
-run;
-
 proc print 
-        data=want (obs=10)
+        data=school_analysis_countyfreq (obs=10)
     ;
 run;
 title;

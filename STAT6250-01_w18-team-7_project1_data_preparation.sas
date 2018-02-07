@@ -130,8 +130,14 @@ run;
 
 
 proc sort 
-        data=publicschool_analysis out=school_analysis;
+        data=publicschool_analysis out=school_analysis
+    ;
         by descending CDSCode NCESDist county
     ;
 run;
 
+data school_analysis_countyfreq;
+    set school_analysis_countyfreq;
+	cumcount + count;
+	cumpercent + percent;
+run;
