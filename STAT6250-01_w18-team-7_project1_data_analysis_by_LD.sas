@@ -56,7 +56,7 @@ Follow-up Setps: other statistical methods are necessary.
 proc freq 
         data=school_analysis order=freq 
 	;
-		table NCESDist / out=school_analysis_NCESDist 
+        table NCESDist / out=school_analysis_NCESDist 
 	;
 run;
 title;
