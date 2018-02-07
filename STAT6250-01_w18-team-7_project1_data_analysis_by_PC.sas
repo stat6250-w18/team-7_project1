@@ -7,12 +7,14 @@
 *
 This file uses the following analytic dataset to address several research
 questions regarding pending, active, closed and merged Campus at CA schools.
+
 Dataset Name: Public_raw created 
 STAT6250-01_w18-team-7_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
-See included file for dataset properties
 
+See included file for dataset properties
 ;
+
 * environmental setup; 
 
 * set relative file import path to current directory (using standard SAS trick);
@@ -24,8 +26,6 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 
-
-
 title1
 'Research Question: What are the lowest ten CODScode with School and Street?'
 ;
@@ -33,7 +33,6 @@ title1
 title2
 'Rationale: This should help identify where are the School and Street in the lowest CODScode levels.'
 ;
-
 
 footnote1
 'Based on the above output, there are three schools located in the same county and two in the same street.'
@@ -44,8 +43,7 @@ footnote2
 ;
 
 footnote3
-'Further analysis to look for the very first CODScode with Schools and Street 
-and how far between them. '
+'Further analysis to look for the very first CODScode with Schools and Street and how far between them.'
 ;
 *
 Methodology: Use PROC FRINT to create a table that shows what are the lowest ten
@@ -56,10 +54,9 @@ these differenct schools locate.
 
 Possible Follow-up Steps: To acheieve this goeal, I should gather up the 
 information of the very first twenty address, city, zipcode of schools.
-
 ;
 proc print
-       
+        noobs
         data=Public_raw(obs=10)
     ;
     id
@@ -76,11 +73,10 @@ footnote;
 
 
 
-
-
 title1
 'Research Question: What are the very first twenty address, city, zipcode of school?'
 ;
+
 title2
 'Rationale: This should help identify where are the first twenty Schools located in the same area.'
 ;
@@ -96,6 +92,7 @@ footnote2
 footnote3
 'Further analysis, there are six schools from Oakland, which is taking the most part of school in the very first twenty.'
 ;
+
 *
 Methodology: Use PROC PRINT to create a table that shows the very first twenty 
 address, city, zipcode of school. 
@@ -107,41 +104,36 @@ Possible Follow-up Steps: To acheieve this goeal, I should do the search that
 how many schools loacated in Hayward with lowest SOC to highest.
 ;	
 proc print
-       
         data=Public_raw(obs=20)
-		NOOBS
     ;
     id
-		
-		School
+	School
     ;
     var
         StreetAbr
     ;
-	var 
-	    Street
-
+    var 
+	Street
     ;
-	var 
-		City
-	;
-	var 
-	   State
-	;
-	var 
-		Zip
-	;
+    var 
+        City
+    ;
+    var 
+	State
+    ;
+    var 
+        Zip
+    ;
 run;
 title;
 footnote;
 
 
 
-
-
 title1
 'Research Question: How many school located in Hayward with the lowest SOC to highest?'
 ;
+
 title2
 'Rationale: This should help identify how many total school in Hayward.'
 ;
@@ -170,8 +162,7 @@ rather than only Hayward even if it has higher number of closing school in
 California.
 ;	
 proc print
-       
-        data=Public_raw noobs
+         data=Public_raw noobs
     ;
 	where City in ('Hayward');
     id
