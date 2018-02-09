@@ -103,10 +103,11 @@ https://github.com/stat6250/team-7_project1/blob/master/public_school_dataset.xl
 
 
 *
-Build analytic dataset from pubschls dataset with the leastcolumns and minimal
-cleaning/transformation neededto analyze research queations in corresponding 
+Build analytic dataset from pubschls dataset with the least columns and minimal
+cleaning/transformation needed to analyze research queations in corresponding 
 data analysis files
 ;
+
 
 data publicschool_analysis;
     retain
@@ -129,6 +130,13 @@ data publicschool_analysis;
 run;
 
 
+
+
+*
+Use PROC SORT to extract and sort publicschool_analysis by descending three 
+variables, which will be used as part of data analysis by LD.
+; 
+
 proc sort 
         data=publicschool_analysis out=school_analysis
     ;
@@ -136,8 +144,6 @@ proc sort
     ;
 run;
 
-data school_analysis_countyfreq;
-    set school_analysis_countyfreq;
-	cumcount + count;
-	cumpercent + percent;
-run;
+
+
+
